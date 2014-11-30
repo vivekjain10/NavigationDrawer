@@ -73,9 +73,22 @@ public class NavigationDrawerActivity extends Activity implements PlanetAdapter.
   private CharSequence mTitle;
   private String[] mPlanetTitles;
 
+  private static Leaky leak = null;
+
+  class Leaky {
+    public void doSomething() {
+      System.out.println("Something!!!");
+    }
+  }
+
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+
+    if (leak == null) {
+      leak = new Leaky();
+    }
+
     setContentView(R.layout.activity_navigation_drawer);
 
     mTitle = mDrawerTitle = getTitle();
