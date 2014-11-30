@@ -37,8 +37,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import java.util.Locale;
-
 /**
  * This example illustrates a common usage of the DrawerLayout widget
  * in the Android support library.
@@ -235,10 +233,8 @@ public class NavigationDrawerActivity extends Activity implements PlanetAdapter.
       int i = getArguments().getInt(ARG_PLANET_NUMBER);
       String planet = getResources().getStringArray(R.array.planets_array)[i];
 
-      int imageId = getResources().getIdentifier(planet.toLowerCase(Locale.getDefault()),
-          "drawable", getActivity().getPackageName());
-      ImageView iv = ((ImageView) rootView.findViewById(R.id.image));
-      iv.setImageResource(imageId);
+      PlanetBitmap planetBitmap = new PlanetBitmap(getActivity());
+      ((ImageView) rootView.findViewById(R.id.image)).setImageBitmap(planetBitmap.getBitmap(planet));
 
       getActivity().setTitle(planet);
       return rootView;
