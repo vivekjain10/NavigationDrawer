@@ -30,6 +30,9 @@ public class PlanetBitmap {
     }
 
     bitmap = BitmapFactory.decodeResource(activity.getResources(), imageId);
+    if (cache.size() > 3) {
+      cache.clear();
+    }
     cache.put(planet, bitmap);
     return bitmap;
   }
