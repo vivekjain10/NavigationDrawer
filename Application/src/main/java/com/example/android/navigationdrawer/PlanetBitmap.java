@@ -10,7 +10,6 @@ import java.util.Map;
 
 public class PlanetBitmap {
 
-  private static Map<String, Bitmap> cache = new HashMap<String, Bitmap>();
   private Activity activity;
 
   public PlanetBitmap(Activity activity) {
@@ -18,19 +17,9 @@ public class PlanetBitmap {
   }
 
   public Bitmap getBitmap(String planet) {
-    Bitmap bitmap = cache.get(planet);
-    if (bitmap != null) return bitmap;
-
     int imageId = activity.getResources().getIdentifier(planet.toLowerCase(Locale.getDefault()),
         "drawable", activity.getPackageName());
 
-    try {
-      Thread.sleep(500);
-    } catch (InterruptedException ignored) {
-    }
-
-    bitmap = BitmapFactory.decodeResource(activity.getResources(), imageId);
-    cache.put(planet, bitmap);
-    return bitmap;
+    return BitmapFactory.decodeResource(activity.getResources(), imageId);
   }
 }
